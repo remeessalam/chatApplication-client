@@ -24,6 +24,7 @@ export function Home() {
 
 function Channels({ loadedChannels }: ChannelListMessengerProps) {
     const navigate = useNavigate()
+    const {logout } = useLoggedInAuth();
     const { setActiveChannel, channel: activeChannel } = useChatContext();
     return (
         <div className="w-60 flex flex-col gap-4 m-3 h-full">
@@ -33,16 +34,23 @@ function Channels({ loadedChannels }: ChannelListMessengerProps) {
                 loadedChannels.map(channel => {
                     const isActive = channel === activeChannel
                     const extraClasses = isActive ?
-                        "bg-blue-500 text-white"
-                        : "hover:bg-blue-100 bg-gray-100"
+                    "bg-blue-500 text-white"
+                    : "hover:bg-blue-100 bg-gray-100"
                     return <button onClick={
                         () => setActiveChannel(channel)
                     }
-                        disabled={isActive} className={`p-4 rounded-lg flex gap-3 items-center ${extraClasses}`}
-                        key={channel.id}
-                    >{channel.data?.image&&<img src={channel.data.image} className={"w-10 h-10 rounded-full objecy-center object-cover"}/>}</button>
+                    disabled={isActive} className={`p-4 rounded-lg flex gap-3 items-center ${extraClasses}`}
+                    key={channel.id}
+                    >{channel.data?.image && (<img src={channel.data.image} className={"w-10 h-10 rounded-full objecy-center object-cover"} />)}
+                        <div className="text-ellipsis overflow-hidden whitespace-nowrap">
+                            {channel.data?.name || channel.id}
+                        </div>
+                    </button>
                 })
                 : "No Conversation"}
+                <hr className="border-gray-500 mt-auto" />
+            <Button onClick={() => logout.mutate()} disabled={logout.isLoading}>Logout</Button>
+            <hr className="border-gray-500" />
         </div >
     )
 }

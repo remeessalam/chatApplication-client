@@ -1,5 +1,6 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { NewChannel } from "./pages/channel/new";
 import { Home } from "./pages/Home";
 import { AuthLayout } from "./pages/layouts/AuthLayout";
 import { RootLayout } from "./pages/layouts/RootLayout";
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
                     { index: true, element: <Home /> },
                     {
                         path: "/channel", children: [
-                            { path: "new", element: <h1>New Channel</h1> }
+                            { path: "new", element: <NewChannel/> }
                         ]
                     },
                 ]

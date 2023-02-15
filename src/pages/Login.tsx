@@ -1,7 +1,7 @@
 import { FormEvent, useRef } from "react";
 import { Navigate } from "react-router";
 import { Button } from "../components/Button";
-import { Input } from "../components/input";
+import { Input } from "../components/Input";
 import { useAuth } from "../context/AuthContext";
 
 
